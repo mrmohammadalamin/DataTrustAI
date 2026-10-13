@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgAgent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060b16" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <style>
+      @keyframes pipeFlow {
+        to { stroke-dashoffset: -40; }
+      }
+      .agent-pipe {
+        stroke-dasharray: 9 5;
+        animation: pipeFlow 1.2s linear infinite;
+      }
+      .title { font-family: 'Segoe UI', Inter, system-ui, sans-serif; font-weight: 700; fill: #ffffff; }
+      .sub { font-family: 'Segoe UI', Inter, system-ui, sans-serif; fill: #94a3b8; }
+      .mono { font-family: Consolas, 'Courier New', monospace; font-weight: 600; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="540" rx="18" fill="url(#bgAgent)" stroke="#1e293b" stroke-width="2" />
+
+  <!-- Top Header -->
+  <rect x="24" y="18" width="1152" height="50" rx="10" fill="#0b1325" stroke="#1e3a8a" stroke-width="1.5" />
+  <text x="44" y="40" font-size="15" class="title">DataTrust AI • Full Agentic Solution Architecture &amp; 6-Stage Closed-Loop Workflow (Activities &amp; Verified Outputs)</text>
+  <text x="44" y="57" font-size="11" class="sub">Autonomous Multi-Agent Pipeline: Telemetry Sentinel → Lineage Investigator → SQL Repair Synthesizer → 5-Gate Sandbox Verifier → GitOps PR → Human Governance Approval</text>
+
+  <!-- Row 1 Connectors (Stages 01 -> 02 -> 03) -->
+  <line x1="380" y1="175" x2="425" y2="175" stroke="#f59e0b" stroke-width="3" class="agent-pipe" />
+  <line x1="775" y1="175" x2="820" y2="175" stroke="#3b82f6" stroke-width="3" class="agent-pipe" />
+
+  <!-- Turnaround Connector from Stage 03 (Top Right) to Stage 04 (Bottom Right) -->
+  <path d="M 995 265 L 995 315" fill="none" stroke="#ec4899" stroke-width="3.5" class="agent-pipe" />
+
+  <!-- Row 2 Connectors (Stages 04 -> 05 -> 06, flowing right-to-left to complete the Closed Loop!) -->
+  <line x1="820" y1="405" x2="775" y2="405" stroke="#a855f7" stroke-width="3" class="agent-pipe" />
+  <line x1="425" y1="405" x2="380" y2="405" stroke="#10b981" stroke-width="3" class="agent-pipe" />
+
+  <!-- Closed-Loop Feedback Arrow from Stage 06 back to Stage 01 -->
+  <path d="M 200 315 L 200 265" fill="none" stroke="#10b981" stroke-width="3" class="agent-pipe" />
+
+  <!-- STAGE 01: DETECT -->
+  <g transform="translate(25, 90)">
+    <rect width="355" height="175" rx="14" fill="#0f172a" stroke="#ef4444" stroke-width="2.2" />
+    <rect x="14" y="14" width="110" height="22" rx="6" fill="#450a0a" />
+    <text x="24" y="29" font-size="11" fill="#fca5a5" class="mono">01_DETECT</text>
+    <text x="134" y="29" font-size="13" class="title">Telemetry &amp; Drift Sentinel</text>
+    <text x="16" y="54" font-size="11" class="sub">Engine: Dataplex DQ + INFORMATION_SCHEMA Poller</text>
+    <text x="16" y="76" font-size="11" fill="#fda4af" class="mono">Activity:</text>
+    <text x="16" y="93" font-size="11" class="sub">• Polls AlloyDB, Spanner &amp; BigQuery partitions</text>
+    <text x="16" y="109" font-size="11" class="sub">• Detects +$148,500 (+11.6%) revenue inflation</text>
+    <rect x="14" y="122" width="327" height="40" rx="8" fill="#060b16" stroke="#ef4444" stroke-width="1" />
+    <text x="24" y="139" font-size="10" fill="#fca5a5" class="mono">OUTPUT: Incident INC-2026-001 (CRITICAL)</text>
+    <text x="24" y="154" font-size="10" fill="#34d399" class="mono">Looker CFO Dashboard Paused (Protected)</text>
+  </g>
+
+  <!-- STAGE 02: DIAGNOSE -->
+  <g transform="translate(425, 90)">
+    <rect width="350" height="175" rx="14" fill="#0f172a" stroke="#f59e0b" stroke-width="2.2" />
+    <rect x="14" y="14" width="120" height="22" rx="6" fill="#451a03" />
+    <text x="24" y="29" font-size="11" fill="#fcd34d" class="mono">02_DIAGNOSE</text>
+    <text x="142" y="29" font-size="13" class="title">Lineage &amp; Root-Cause Agent</text>
+    <text x="16" y="54" font-size="11" class="sub">Engine: Gemini 2.5 Pro + Column DAG Graph</text>
+    <text x="16" y="76" font-size="11" fill="#fde68a" class="mono">Activity:</text>
+    <text x="16" y="93" font-size="11" class="sub">• Traverses Looker → BigQuery → AlloyDB CDC</text>
+    <text x="16" y="109" font-size="11" class="sub">• Ranks 6 competing hypotheses in parallel</text>
+    <rect x="14" y="122" width="322" height="40" rx="8" fill="#060b16" stroke="#f59e0b" stroke-width="1" />
+    <text x="24" y="139" font-size="10" fill="#fcd34d" class="mono">OUTPUT: 96.8% Conf — Webhook Retry Fanout</text>
+    <text x="24" y="154" font-size="10" fill="#34d399" class="mono">Duplicates: ORD-1001, ORD-1002, ORD-1004</text>
+  </g>
+
+  <!-- STAGE 03: REPAIR -->
+  <g transform="translate(820, 90)">
+    <rect width="355" height="175" rx="14" fill="#0f172a" stroke="#3b82f6" stroke-width="2.2" />
+    <rect x="14" y="14" width="110" height="22" rx="6" fill="#172554" />
+    <text x="24" y="29" font-size="11" fill="#93c5fd" class="mono">03_REPAIR</text>
+    <text x="132" y="29" font-size="13" class="title">Dialect SQL Synthesizer</text>
+    <text x="16" y="54" font-size="11" class="sub">Engine: Gemini 2.5 Code Synth + SQL Transpiler</text>
+    <text x="16" y="76" font-size="11" fill="#93c5fd" class="mono">Activity:</text>
+    <text x="16" y="93" font-size="11" class="sub">• Synthesizes deterministic deduplication CTE</text>
+    <text x="16" y="109" font-size="11" class="sub">• Preserves downstream schema &amp; partition keys</text>
+    <rect x="14" y="122" width="327" height="40" rx="8" fill="#060b16" stroke="#3b82f6" stroke-width="1" />
+    <text x="24" y="139" font-size="10" fill="#93c5fd" class="mono">OUTPUT: Unified SQL / dbt Patch Diff</text>
+    <text x="24" y="154" font-size="10" fill="#34d399" class="mono">ROW_NUMBER() OVER (PARTITION BY order_id)=1</text>
+  </g>
+
+  <!-- STAGE 04: VERIFY (Bottom Right) -->
+  <g transform="translate(820, 315)">
+    <rect width="355" height="185" rx="14" fill="#0f172a" stroke="#ec4899" stroke-width="2.5" />
+    <rect x="14" y="14" width="110" height="22" rx="6" fill="#500724" />
+    <text x="24" y="29" font-size="11" fill="#f9a8d4" class="mono">04_VERIFY</text>
+    <text x="132" y="29" font-size="13" class="title">5-Gate Sandbox Verifier</text>
+    <text x="16" y="54" font-size="11" class="sub">Engine: MultiDatabaseSandboxEngine + AST Guard</text>
+    <text x="16" y="74" font-size="11" fill="#f9a8d4" class="mono">Activities (5 Deterministic Gates):</text>
+    <text x="16" y="91" font-size="11" class="sub">• G1 AST Read-Only | G2 PII IAM | G3 Dry-Run $0.007</text>
+    <text x="16" y="107" font-size="11" class="sub">• G4 Before/After SQL Math | G5 14/14 dbt Tests</text>
+    <rect x="14" y="120" width="327" height="50" rx="8" fill="#060b16" stroke="#ec4899" stroke-width="1" />
+    <text x="24" y="138" font-size="10" fill="#f9a8d4" class="mono">OUTPUT: 5/5 GATES PASSED (0 Duplicates)</text>
+    <text x="24" y="153" font-size="10" fill="#34d399" class="mono">$1,428,500 → $1,280,000 (-$148,500 Fixed)</text>
+    <text x="24" y="166" font-size="9" fill="#94a3b8" class="mono">SHA-256: e3b0c44298fc1c149afbf4c8996fb924</text>
+  </g>
+
+  <!-- STAGE 05: PR & GOVERNANCE (Bottom Middle) -->
+  <g transform="translate(425, 315)">
+    <rect width="350" height="185" rx="14" fill="#0f172a" stroke="#a855f7" stroke-width="2.2" />
+    <rect x="14" y="14" width="120" height="22" rx="6" fill="#3b0764" />
+    <text x="24" y="29" font-size="11" fill="#d8b4fe" class="mono">05_GOVERNANCE</text>
+    <text x="142" y="29" font-size="13" class="title">GitOps PR &amp; RBAC Gate</text>
+    <text x="16" y="54" font-size="11" class="sub">Engine: EnterpriseAuthService + GitHub PR Bot</text>
+    <text x="16" y="74" font-size="11" fill="#d8b4fe" class="mono">Activity:</text>
+    <text x="16" y="91" font-size="11" class="sub">• Opens signed Git PR #418 with 5-Gate Proof</text>
+    <text x="16" y="107" font-size="11" class="sub">• Enforces DATA_GOVERNANCE_APPROVER RBAC</text>
+    <rect x="14" y="120" width="322" height="50" rx="8" fill="#060b16" stroke="#a855f7" stroke-width="1" />
+    <text x="24" y="138" font-size="10" fill="#d8b4fe" class="mono">OUTPUT: PR #418 Ready for Human Review</text>
+    <text x="24" y="153" font-size="10" fill="#34d399" class="mono">Unauthorized Roles Blocked (HTTP 403)</text>
+    <text x="24" y="166" font-size="9" fill="#94a3b8" class="mono">Branch: fix/datatrust-inc-2026-001</text>
+  </g>
+
+  <!-- STAGE 06: APPROVE & DEPLOY (Bottom Left) -->
+  <g transform="translate(25, 315)">
+    <rect width="355" height="185" rx="14" fill="#0f172a" stroke="#10b981" stroke-width="2.2" />
+    <rect x="14" y="14" width="110" height="22" rx="6" fill="#064e3b" />
+    <text x="24" y="29" font-size="11" fill="#6ee7b7" class="mono">06_APPROVE</text>
+    <text x="132" y="29" font-size="13" class="title">Promotion &amp; Audit Ledger</text>
+    <text x="16" y="54" font-size="11" class="sub">Engine: SHA-256 Compliance Ledger + Looker Sync</text>
+    <text x="16" y="74" font-size="11" fill="#6ee7b7" class="mono">Activity:</text>
+    <text x="16" y="91" font-size="11" class="sub">• Merges verified PR &amp; backfills BigQuery mart</text>
+    <text x="16" y="107" font-size="11" class="sub">• Unpauses Looker dashboard &amp; logs SHA-256</text>
+    <rect x="14" y="120" width="327" height="50" rx="8" fill="#060b16" stroke="#10b981" stroke-width="1" />
+    <text x="24" y="138" font-size="10" fill="#6ee7b7" class="mono">OUTPUT: RESOLVED_AND_DEPLOYED (MTTR 4.2m)</text>
+    <text x="24" y="153" font-size="10" fill="#34d399" class="mono">Approved: Elena Rostova (Governance VP)</text>
+    <text x="24" y="166" font-size="9" fill="#94a3b8" class="mono">Audit Hash: 9f86d081884c7d659a2feaa0c55ad015</text>
+  </g>
+</svg>

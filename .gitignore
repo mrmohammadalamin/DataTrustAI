@@ -1,0 +1,30 @@
+# Strictly exclude Word documents and lock files per project requirements
+datatrust.docx
+*.docx
+*.doc
+.~lock.*
+~$*
+
+# Python / FastAPI artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Node / TypeScript Frontend build & dependencies
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+*.tsbuildinfo
+
+# Terraform & Local Secrets
+.terraform/
+*.tfstate
+*.tfstate.*
+.env
+.env.*
+*.log

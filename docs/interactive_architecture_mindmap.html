@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DataTrust AI — Interactive Animated Architecture & Mindmap Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes dashPulse {
+      to { stroke-dashoffset: -48; }
+    }
+    .animated-edge {
+      stroke-dasharray: 9 6;
+      animation: dashPulse 1.4s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#080d1a] text-slate-100 antialiased p-6 space-y-6">
+  <div class="max-w-7xl mx-auto space-y-6">
+    <div class="bg-[#0f172a] border border-blue-500/30 rounded-2xl p-6 shadow-xl">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 text-xs font-bold mb-2">
+            ● Google Cloud • DataTrust AI Interactive Mindmap &amp; Agentic Workflow Explorer
+          </span>
+          <h1 class="text-2xl font-extrabold text-white">
+            Overall Solution Mindmap, Module Architecture &amp; 6-Stage Agentic Workflow
+          </h1>
+          <p class="text-xs text-slate-300 mt-1">
+            Click any node or agent stage below to inspect live engine activities, technical specifications, and verified JSON/SQL outputs.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="playPauseBtn" onclick="togglePlay()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold">
+            ⏸ Pause Auto-Animation
+          </button>
+          <button onclick="stepNext()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold">
+            ⏭ Next Node / Stage
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div class="lg:col-span-7 bg-[#0f172a] border border-slate-800 rounded-2xl p-4">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-bold text-white">Interactive Animated Mindmap Canvas</h2>
+          <span id="activeNodeBadge" class="text-xs font-mono px-2.5 py-1 rounded bg-blue-500/15 text-blue-300 border border-blue-500/30">
+            Node 1 / 7
+          </span>
+        </div>
+        <div class="overflow-x-auto bg-[#070b14] border border-slate-800 rounded-xl p-2">
+          <svg id="mindmapSvg" viewBox="0 0 960 540" class="w-full h-auto min-w-[620px]"></svg>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 bg-[#0f172a] border border-slate-800 rounded-2xl p-5 space-y-4">
+        <div>
+          <div id="detailCategory" class="text-xs font-mono font-bold uppercase text-blue-400">CORE CONTROL PLANE</div>
+          <h3 id="detailTitle" class="text-lg font-bold text-white mt-0.5">DataTrust AI Control Plane</h3>
+          <p id="detailSubtitle" class="text-xs text-slate-400">Cloud Run + FastAPI + Vertex AI</p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+          <div class="text-xs font-bold uppercase text-blue-300">Live Activity &amp; Working Process</div>
+          <p id="detailActivity" class="text-xs text-slate-200 leading-relaxed"></p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
+          <div class="text-xs font-bold uppercase text-amber-300">Concrete Activity Output (JSON / SQL Proof)</div>
+          <pre id="detailOutput" class="text-xs font-mono overflow-x-auto leading-relaxed text-emerald-300"></pre>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30 space-y-1">
+          <div class="text-xs font-bold uppercase text-indigo-300">How It Solves the Enterprise Problem</div>
+          <p id="detailProblem" class="text-xs text-slate-200 leading-relaxed"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const nodes = [
+      {
+        id: 'core', title: 'DataTrust AI Control Plane', sub: 'Cloud Run + FastAPI + Vertex AI', cat: 'CORE CONTROL PLANE',
+        x: 480, y: 270, color: '#3b82f6',
+        activity: 'Orchestrates read-only telemetry ingestion, multi-agent root-cause diagnosis, 5-Gate SQL sandbox verification, and human-governed GitOps remediation.',
+        output: '{\n  "control_plane": "datatrust-ai-control-plane",\n  "mode": "ZERO_DATA_EXFILTRATION",\n  "active_connectors": 12,\n  "trust_score": 99.4\n}',
+        problem: 'Bridges the enterprise gap between passive alert-only observability tools and risky unverified AI SQL generators.'
+      },
+      {
+        id: 'data', title: '1. Multi-Cloud & GCP Data Estate', sub: '12 Read-Only Database Adapters', cat: 'DATA CONNECTIVITY',
+        x: 165, y: 95, color: '#06b6d4',
+        activity: 'Connects via Workload Identity (datatrust-agent-ro) to BigQuery, AlloyDB, Spanner, Cloud SQL, Bigtable, Firestore, Snowflake, Databricks & AWS/Azure Omni.',
+        output: '{\n  "connector": "AlloyDB -> BigQuery",\n  "auth": "WORKLOAD_IDENTITY_READ_ONLY",\n  "tables_introspected": 42,\n  "write_access": false\n}',
+        problem: 'Provides unified cross-engine lineage when an upstream OLTP schema drift breaks downstream analytical marts.'
+      },
+      {
+        id: 'sec', title: '2. Zero-Trust IAP & RBAC Gate', sub: 'Cloud IAP + OIDC + 4-Tier RBAC', cat: 'SECURITY & ACCESS',
+        x: 165, y: 270, color: '#10b981',
+        activity: 'Verifies Google Cloud IAP JWT assertions at the edge and enforces server-side RBAC (Viewer, Engineer, Governance Approver, Partner Admin).',
+        output: '{\n  "user": "elena.rostova@globalretail.com",\n  "role": "DATA_GOVERNANCE_APPROVER",\n  "iap_jwt_verified": true,\n  "can_approve_pr": true\n}',
+        problem: 'Prevents unauthorized users or autonomous AI agents from pushing unapproved changes to production.'
+      },
+      {
+        id: 'gtm', title: '3. Deployment & Partner Models', sub: 'Options A/B/C & Partner Routes 1/2/3', cat: 'CLOUD DEPLOYMENT',
+        x: 165, y: 445, color: '#a855f7',
+        activity: 'Supports Customer VPC Cloud Run deployment via Terraform, Vertex AI Agent Engine native hosting, and Multi-Tenant GSI Partner command centers.',
+        output: '{\n  "deployment": "OPTION_A_CUSTOMER_VPC_CLOUD_RUN",\n  "service_account": "datatrust-agent-ro",\n  "mttr_reduction": "94.2%"\n}',
+        problem: 'Enables regulated enterprises and Google Cloud Partners to deploy with zero data leaving the VPC.'
+      },
+      {
+        id: 'loop', title: '4. 6-Stage Agentic Closed Loop', sub: 'Detect -> Diagnose -> Repair -> Verify', cat: 'AGENTIC ORCHESTRATION',
+        x: 795, y: 95, color: '#f59e0b',
+        activity: 'Runs 6 specialized agents: Anomaly Sentinel, Lineage Root-Cause Investigator, Dialect SQL Synthesizer, 5-Gate Verifier, GitOps PR Agent, and Audit Ledger.',
+        output: '{\n  "incident_id": "INC-2026-001",\n  "winning_hypothesis": "Duplicate payment webhook retries",\n  "confidence": 96.8\n}',
+        problem: 'Cuts incident resolution time from 18+ hours of manual war-room debugging down to under 5 minutes.'
+      },
+      {
+        id: 'verify', title: '5. Deterministic 5-Gate Sandbox', sub: 'Before/After SQL Proof Engine', cat: 'MATHEMATICAL PROOF',
+        x: 795, y: 270, color: '#ec4899',
+        activity: 'Validates AST safety (no DROP/DELETE), IAM PII tags, BigQuery dry-run cost ($0.007), and executes before/after SQL proving -$148,500 variance removal.',
+        output: '{\n  "gate_1_ast_safety": "PASSED",\n  "before_revenue": "$1,428,500.00",\n  "after_revenue": "$1,280,000.00",\n  "variance_eliminated": "-$148,500.00"\n}',
+        problem: 'Eliminates AI hallucination risk by proving the SQL fix mathematically before any human approves.'
+      },
+      {
+        id: 'nl2sql', title: '6. Governed NL-to-SQL Studio', sub: 'Self-Service BI on Certified Views', cat: 'GOVERNED ANALYTICS',
+        x: 795, y: 445, color: '#6366f1',
+        activity: 'Translates natural-language questions into read-only SQL executed strictly against 5-Gate certified views with automatic PII masking.',
+        output: '{\n  "query_mode": "AST_VERIFIED_READ_ONLY",\n  "pii_policy": "PII_REDACTED",\n  "provenance_badge": "CERTIFIED_GOLD_VIEW"\n}',
+        problem: 'Lets business leaders query live data in plain English without reading broken tables or exposing PII.'
+      }
+    ];
+
+    let selectedNodeIdx = 0;
+    let playing = true;
+
+    function renderMindmap() {
+      const svg = document.getElementById('mindmapSvg');
+      const core = nodes[0];
+      let html = '';
+
+      for (let i = 1; i < nodes.length; i++) {
+        const n = nodes[i];
+        const active = i === selectedNodeIdx;
+        const d = `M ${core.x} ${core.y} C ${(core.x + n.x)/2} ${core.y}, ${(core.x + n.x)/2} ${n.y}, ${n.x} ${n.y}`;
+        html += `<path d="${d}" fill="none" stroke="${n.color}" stroke-opacity="${active ? '0.5' : '0.2'}" stroke-width="${active ? 6 : 3}" />`;
+        html += `<path d="${d}" fill="none" stroke="${n.color}" stroke-width="${active ? 3 : 2}" class="animated-edge" />`;
+      }
+
+      nodes.forEach((n, idx) => {
+        const active = idx === selectedNodeIdx;
+        const w = idx === 0 ? 235 : 245;
+        const h = idx === 0 ? 84 : 74;
+        html += `
+          <g transform="translate(${n.x - w/2}, ${n.y - h/2})" onclick="selectNode(${idx})" style="cursor:pointer">
+            <rect width="${w}" height="${h}" rx="12" fill="#0f172a" stroke="${n.color}" stroke-width="${active ? 3.5 : 1.8}" />
+            <circle cx="20" cy="24" r="6" fill="${n.color}" />
+            <text x="34" y="28" fill="#ffffff" font-size="12" font-weight="bold" font-family="sans-serif">${n.title}</text>
+            <text x="34" y="46" fill="#94a3b8" font-size="12" font-family="sans-serif">${n.sub}</text>
+            <text x="34" y="63" fill="${n.color}" font-size="12" font-family="monospace">${active ? '● ACTIVE INSPECTOR' : 'Click to inspect'}</text>
+          </g>
+        `;
+      });
+
+      svg.innerHTML = html;
+      const cur = nodes[selectedNodeIdx];
+      document.getElementById('activeNodeBadge').textContent = `Node ${selectedNodeIdx + 1} / ${nodes.length}: ${cur.title}`;
+      document.getElementById('detailCategory').textContent = cur.cat;
+      document.getElementById('detailTitle').textContent = cur.title;
+      document.getElementById('detailSubtitle').textContent = cur.sub;
+      document.getElementById('detailActivity').textContent = cur.activity;
+      document.getElementById('detailOutput').textContent = cur.output;
+      document.getElementById('detailProblem').textContent = cur.problem;
+    }
+
+    function selectNode(idx) {
+      playing = false;
+      document.getElementById('playPauseBtn').textContent = '▶ Resume Auto-Animation';
+      selectedNodeIdx = idx;
+      renderMindmap();
+    }
+
+    function stepNext() {
+      selectedNodeIdx = (selectedNodeIdx + 1) % nodes.length;
+      renderMindmap();
+    }
+
+    function togglePlay() {
+      playing = !playing;
+      document.getElementById('playPauseBtn').textContent = playing ? '⏸ Pause Auto-Animation' : '▶ Resume Auto-Animation';
+    }
+
+    setInterval(() => {
+      if (playing) stepNext();
+    }, 4000);
+
+    renderMindmap();
+  </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070c18" />
+      <stop offset="50%" stop-color="#0d162c" />
+      <stop offset="100%" stop-color="#070c18" />
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+    </radialGradient>
+    <style>
+      @keyframes streamDash {
+        to { stroke-dashoffset: -48; }
+      }
+      @keyframes pulseRing {
+        0%, 100% { r: 135px; stroke-opacity: 0.45; }
+        50% { r: 155px; stroke-opacity: 0.15; }
+      }
+      .flow-line {
+        stroke-dasharray: 10 6;
+        animation: streamDash 1.5s linear infinite;
+      }
+      .pulse-circle {
+        animation: pulseRing 3s ease-in-out infinite;
+      }
+      .title { font-family: 'Segoe UI', Inter, system-ui, sans-serif; font-weight: 700; fill: #ffffff; }
+      .sub { font-family: 'Segoe UI', Inter, system-ui, sans-serif; fill: #94a3b8; }
+      .mono { font-family: Consolas, 'Courier New', monospace; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="680" rx="18" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="2" />
+
+  <!-- Top Title Banner -->
+  <rect x="24" y="18" width="1152" height="54" rx="12" fill="#0f172a" stroke="#1e3a8a" stroke-width="1.5" />
+  <circle cx="50" cy="45" r="8" fill="#3b82f6" />
+  <text x="68" y="42" font-size="16" class="title">DataTrust AI • Overall Solution, Module &amp; Multi-Cloud Architecture Mindmap (Live Animated Flow)</text>
+  <text x="68" y="60" font-size="12" class="sub">Zero-Data-Exfiltration Control Plane • 12 GCP &amp; Multi-Cloud Adapters • 6-Stage Autonomous Closed Loop • 5-Gate Mathematical Proof</text>
+
+  <!-- Center Glow Rings -->
+  <circle cx="600" cy="365" r="210" fill="url(#coreGlow)" />
+  <circle cx="600" cy="365" r="140" fill="none" stroke="#3b82f6" stroke-width="1.5" class="pulse-circle" />
+  <circle cx="600" cy="365" r="230" fill="none" stroke="#1e293b" stroke-dasharray="5 5" />
+
+  <!-- Animated Mindmap Connectors -->
+  <!-- Left Top: Data Estate -->
+  <path d="M 600 365 C 410 365, 410 155, 215 155" fill="none" stroke="#06b6d4" stroke-opacity="0.22" stroke-width="6" />
+  <path d="M 600 365 C 410 365, 410 155, 215 155" fill="none" stroke="#06b6d4" stroke-width="2.5" class="flow-line" />
+
+  <!-- Left Middle: Security & IAP -->
+  <path d="M 600 365 C 410 365, 410 365, 215 365" fill="none" stroke="#10b981" stroke-opacity="0.22" stroke-width="6" />
+  <path d="M 600 365 C 410 365, 410 365, 215 365" fill="none" stroke="#10b981" stroke-width="2.5" class="flow-line" />
+
+  <!-- Left Bottom: Deployment & Partner GTM -->
+  <path d="M 600 365 C 410 365, 410 565, 215 565" fill="none" stroke="#a855f7" stroke-opacity="0.22" stroke-width="6" />
+  <path d="M 600 365 C 410 365, 410 565, 215 565" fill="none" stroke="#a855f7" stroke-width="2.5" class="flow-line" />
+
+  <!-- Right Top: 6-Stage Agentic Loop -->
+  <path d="M 600 365 C 790 365, 790 155, 985 155" fill="none" stroke="#f59e0b" stroke-opacity="0.22" stroke-width="6" />
+  <path d="M 600 365 C 790 365, 790 155, 985 155" fill="none" stroke="#f59e0b" stroke-width="2.5" class="flow-line" />
+
+  <!-- Right Middle: 5-Gate Sandbox -->
+  <path d="M 600 365 C 790 365, 790 365, 985 365" fill="none" stroke="#ec4899" stroke-opacity="0.22" stroke-width="6" />
+  <path d="M 600 365 C 790 365, 790 365, 985 365" fill="none" stroke="#ec4899" stroke-width="2.5" class="flow-line" />
+
+  <!-- Right Bottom: Governed NL2SQL & GitOps -->
+  <path d="M 600 365 C 790 365, 790 565, 985 565" fill="none" stroke="#6366f1" stroke-opacity="0.22" stroke-width="6" />
+  <path d="M 600 365 C 790 365, 790 565, 985 565" fill="none" stroke="#6366f1" stroke-width="2.5" class="flow-line" />
+
+  <!-- CENTER HUB NODE -->
+  <g transform="translate(455, 305)">
+    <rect width="290" height="120" rx="16" fill="#172554" stroke="#3b82f6" stroke-width="3" />
+    <text x="145" y="32" text-anchor="middle" font-size="15" class="title">DataTrust AI Core Hub</text>
+    <text x="145" y="52" text-anchor="middle" font-size="12" fill="#93c5fd" class="mono">FastAPI + React 19 TS + Vertex AI</text>
+    <text x="145" y="74" text-anchor="middle" font-size="11" class="sub">Activity: Cross-DB Lineage &amp; SQL Proof</text>
+    <rect x="20" y="86" width="250" height="22" rx="6" fill="#0f172a" stroke="#3b82f6" stroke-width="1" />
+    <text x="145" y="101" text-anchor="middle" font-size="11" fill="#34d399" class="mono">Output: Trust Score 99.4% | MTTR 4.2m</text>
+  </g>
+
+  <!-- BRANCH 1: LEFT TOP (Multi-Cloud & GCP Data Estate) -->
+  <g transform="translate(28, 95)">
+    <rect width="365" height="122" rx="14" fill="#0f172a" stroke="#06b6d4" stroke-width="2.2" />
+    <circle cx="22" cy="24" r="6" fill="#06b6d4" />
+    <text x="36" y="28" font-size="14" class="title">1. Multi-Cloud &amp; GCP Data Estate (12 Sources)</text>
+    <text x="20" y="48" font-size="11" class="sub">BigQuery • AlloyDB • Spanner • Cloud SQL • Bigtable • Firestore</text>
+    <text x="20" y="65" font-size="11" class="sub">Datastream • Composer/dbt • Dataplex • Looker • Snowflake • AWS/Azure</text>
+    <text x="20" y="84" font-size="11" fill="#67e8f9" class="mono">Activity: Read-Only INFORMATION_SCHEMA &amp; CDC Poll</text>
+    <rect x="16" y="92" width="333" height="22" rx="5" fill="#070c18" />
+    <text x="24" y="107" font-size="11" fill="#34d399" class="mono">Output: 42 Tables Introspected | Write=False</text>
+  </g>
+
+  <!-- BRANCH 2: LEFT MIDDLE (Security, IAP SSO & RBAC Gate) -->
+  <g transform="translate(28, 305)">
+    <rect width="365" height="122" rx="14" fill="#0f172a" stroke="#10b981" stroke-width="2.2" />
+    <circle cx="22" cy="24" r="6" fill="#10b981" />
+    <text x="36" y="28" font-size="14" class="title">2. Zero-Trust IAP SSO &amp; 4-Role RBAC Gate</text>
+    <text x="20" y="48" font-size="11" class="sub">Google Cloud IAP JWT + Identity Platform OIDC + Org Sign-Up</text>
+    <text x="20" y="65" font-size="11" class="sub">Roles: Viewer | Engineer | Governance Approver | Partner Admin</text>
+    <text x="20" y="84" font-size="11" fill="#6ee7b7" class="mono">Activity: Verifies X-Goog-IAP-JWT &amp; Server RBAC</text>
+    <rect x="16" y="92" width="333" height="22" rx="5" fill="#070c18" />
+    <text x="24" y="107" font-size="11" fill="#34d399" class="mono">Output: HTTP 200 Authorized / HTTP 403 Blocked</text>
+  </g>
+
+  <!-- BRANCH 3: LEFT BOTTOM (Cloud Run, Terraform & Partner GTM) -->
+  <g transform="translate(28, 505)">
+    <rect width="365" height="122" rx="14" fill="#0f172a" stroke="#a855f7" stroke-width="2.2" />
+    <circle cx="22" cy="24" r="6" fill="#a855f7" />
+    <text x="36" y="28" font-size="14" class="title">3. Cloud Run IaC &amp; Partner GTM Models</text>
+    <text x="20" y="48" font-size="11" class="sub">Dockerfile • cloudbuild.yaml • deploy/terraform/main.tf</text>
+    <text x="20" y="65" font-size="11" class="sub">Options A/B/C &amp; Partner Routes 1/2/3 (Multi-Tenant MSP)</text>
+    <text x="20" y="84" font-size="11" fill="#d8b4fe" class="mono">Activity: Provisions datatrust-agent-ro Read-Only SA</text>
+    <rect x="16" y="92" width="333" height="22" rx="5" fill="#070c18" />
+    <text x="24" y="107" font-size="11" fill="#34d399" class="mono">Output: VPC-Scoped Cloud Run Service Ready</text>
+  </g>
+
+  <!-- BRANCH 4: RIGHT TOP (6-Stage Agentic Closed Loop) -->
+  <g transform="translate(807, 95)">
+    <rect width="365" height="122" rx="14" fill="#0f172a" stroke="#f59e0b" stroke-width="2.2" />
+    <circle cx="22" cy="24" r="6" fill="#f59e0b" />
+    <text x="36" y="28" font-size="14" class="title">4. 6-Stage Autonomous Agentic Closed Loop</text>
+    <text x="20" y="48" font-size="11" class="sub">01_DETECT → 02_DIAGNOSE → 03_REPAIR → 04_VERIFY</text>
+    <text x="20" y="65" font-size="11" class="sub">6-Hypothesis Bayesian Root Cause + Dialect SQL Synthesizer</text>
+    <text x="20" y="84" font-size="11" fill="#fcd34d" class="mono">Activity: Pinpoints AlloyDB Webhook Retry Fanout</text>
+    <rect x="16" y="92" width="333" height="22" rx="5" fill="#070c18" />
+    <text x="24" y="107" font-size="11" fill="#34d399" class="mono">Output: 96.8% Root-Cause + Dedup CTE Patch</text>
+  </g>
+
+  <!-- BRANCH 5: RIGHT MIDDLE (Deterministic 5-Gate Verification Sandbox) -->
+  <g transform="translate(807, 305)">
+    <rect width="365" height="122" rx="14" fill="#0f172a" stroke="#ec4899" stroke-width="2.2" />
+    <circle cx="22" cy="24" r="6" fill="#ec4899" />
+    <text x="36" y="28" font-size="14" class="title">5. Deterministic 5-Gate Verification Sandbox</text>
+    <text x="20" y="48" font-size="11" class="sub">Gate 1: AST Safety | Gate 2: PII IAM | Gate 3: BQ Dry-Run Cost</text>
+    <text x="20" y="65" font-size="11" class="sub">Gate 4: Before/After SQL Math | Gate 5: 14/14 dbt Regression</text>
+    <text x="20" y="84" font-size="11" fill="#f9a8d4" class="mono">Activity: Executes Broken vs Fixed SQL in Sandbox</text>
+    <rect x="16" y="92" width="333" height="22" rx="5" fill="#070c18" />
+    <text x="24" y="107" font-size="11" fill="#34d399" class="mono">Output: $1,428,500 → $1,280,000 (-$148.5k Fixed)</text>
+  </g>
+
+  <!-- BRANCH 6: RIGHT BOTTOM (GitOps PR, Audit Ledger & Governed NL2SQL) -->
+  <g transform="translate(807, 505)">
+    <rect width="365" height="122" rx="14" fill="#0f172a" stroke="#6366f1" stroke-width="2.2" />
+    <circle cx="22" cy="24" r="6" fill="#6366f1" />
+    <text x="36" y="28" font-size="14" class="title">6. GitOps PR Gate &amp; Governed NL-to-SQL Studio</text>
+    <text x="20" y="48" font-size="11" class="sub">05_PR_AND_GOVERNANCE → 06_APPROVE + Immutable Audit Log</text>
+    <text x="20" y="65" font-size="11" class="sub">Self-Service NL2SQL Studio with PII_REDACTED Policy Tags</text>
+    <text x="20" y="84" font-size="11" fill="#a5b4fc" class="mono">Activity: Generates Git PR #418 &amp; Signs Audit Hash</text>
+    <rect x="16" y="92" width="333" height="22" rx="5" fill="#070c18" />
+    <text x="24" y="107" font-size="11" fill="#34d399" class="mono">Output: Signed PR #418 + SHA-256 Compliance Proof</text>
+  </g>
+</svg>

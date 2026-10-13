@@ -1,0 +1,40 @@
+steps:
+  # 1. Run Backend Deterministic Pytest Suite (6/6 Gate & RBAC Verification)
+  - name: 'python:3.13-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install --no-cache-dir -r backend/requirements.txt
+        python -m pytest backend/test_api.py -v
+
+  # 2. Build Production Container Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/datatrust-repo/datatrust-ai:$SHORT_SHA'
+      - '.'
+
+  # 3. Push Image to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/datatrust-repo/datatrust-ai:$SHORT_SHA'
+
+  # 4. Deploy to Google Cloud Run with Least-Privilege Service Account
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'datatrust-ai-engine'
+      - '--image=${_REGION}-docker.pkg.dev/$PROJECT_ID/datatrust-repo/datatrust-ai:$SHORT_SHA'
+      - '--region=${_REGION}'
+      - '--platform=managed'
+      - '--service-account=datatrust-agent-ro@$PROJECT_ID.iam.gserviceaccount.com'
+      - '--no-allow-unauthenticated'
+      - '--set-env-vars=GCP_PROJECT_ID=$PROJECT_ID,ENFORCE_GCP_IAP=true'
+
+substitutions:
+  _REGION: europe-west2
