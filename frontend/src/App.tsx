@@ -523,8 +523,8 @@ export function App() {
                     <Sparkles className="w-4 h-4 text-indigo-400" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-white">Gemini 4 Argon Analyst</div>
-                    <div className="text-[10px] text-emerald-400">● Online &bull; Read-Only Scoped</div>
+                    <div className="text-xs font-bold text-white">Vertex AI &bull; Gemini 3.1 Pro</div>
+                    <div className="text-[10px] text-emerald-400">● gemini-3.1-pro-preview &bull; Read-Only</div>
                   </div>
                 </div>
               </div>

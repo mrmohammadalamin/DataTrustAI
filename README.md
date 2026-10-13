@@ -198,7 +198,7 @@ flowchart LR
 | **Security & RBAC** | [`backend/auth_service.py`](backend/auth_service.py) | `EnterpriseAuthService` | Manages Google Cloud IAP / OIDC SSO personas, corporate login, organization sign-up, and enforces server-side `HTTP 403 Forbidden` on unauthorized mutations. |
 | **Multi-Cloud Adapters** | [`backend/live_connector_adapters.py`](backend/live_connector_adapters.py) | `test_connector_handshake()`, `get_connector_presets()` | Provides 12 Google Cloud & Multi-Cloud connection presets, validates URI formats (`projects/*/datasets/*`, `postgresql://`, `snowflake://`), and introspects live schemas. |
 | **Governed NL2SQL** | [`backend/analytics_service.py`](backend/analytics_service.py) | `GovernedAnalyticsService.execute_governed_query()` | Translates natural-language questions into AST-verified read-only SQL against certified views with `PII_REDACTED` policy tags. |
-| **Live GCP Bridge** | [`backend/gcp_production_bridge.py`](backend/gcp_production_bridge.py) | `execute_real_bigquery_dry_run()`, `generate_live_gemini_diagnosis()` | Connects to live `google-cloud-bigquery` (`QueryJobConfig(dry_run=True)`) and live Vertex AI / Gemini 2.5 Flash when cloud credentials are configured. |
+| **Live GCP Bridge** | [`backend/gcp_production_bridge.py`](backend/gcp_production_bridge.py) | `run_bigquery_dry_run_if_configured()`, `generate_gemini_diagnosis_if_configured()` | Connects to live `google-cloud-bigquery` (`QueryJobConfig(dry_run=True)`) and live Vertex AI / Gemini 3.1 Pro (`gemini-3.1-pro-preview`) & Gemini 3 Flash (`gemini-3-flash-preview`) when cloud credentials are configured. |
 | **Frontend Console** | [`frontend/src/App.tsx`](frontend/src/App.tsx) | `App` + 6 specialized tab components | Google Cloud Console UI featuring Command Center, Lineage DAG, SQL Diff & 5-Gate Proof, Governed NL2SQL Studio, RBAC Approval Center, and Interactive Mindmap Studio. |
 | **Cloud IaC** | [`deploy/terraform/main.tf`](deploy/terraform/main.tf), [`Dockerfile`](Dockerfile), [`cloudbuild.yaml`](cloudbuild.yaml) | Terraform resources & Cloud Build steps | Provisions `datatrust-agent-ro` read-only service account, binds least-privilege IAM roles, builds non-root container, and deploys to Cloud Run v2. |
 
@@ -213,8 +213,8 @@ sequenceDiagram
     autonumber
     participant DB as GCP / Multi-Cloud DBs<br/>(AlloyDB, Spanner, BigQuery)
     participant S1 as Agent 1: Sentinel Detector<br/>(01_DETECT)
-    participant S2 as Agent 2: Lineage & Root-Cause<br/>(02_DIAGNOSE • Gemini 2.5 Pro)
-    participant S3 as Agent 3: SQL Repair Synth<br/>(03_REPAIR • Multi-Dialect)
+    participant S2 as Agent 2: Lineage & Root-Cause<br/>(02_DIAGNOSE • Gemini 3.1 Pro)
+    participant S3 as Agent 3: SQL Repair Synth<br/>(03_REPAIR • Gemini 3.1 Pro)
     participant S4 as Agent 4: 5-Gate Sandbox Verifier<br/>(04_VERIFY • AST + SQL Engine)
     participant S5 as Agent 5: GitOps & RBAC Gate<br/>(05_PR_AND_GOVERNANCE)
     participant Human as Elena Rostova<br/>(DATA_GOVERNANCE_APPROVER)
@@ -449,17 +449,17 @@ Our [`cloudbuild.yaml`](cloudbuild.yaml) runs the `pytest` verification suite fi
 gcloud builds submit --config=cloudbuild.yaml .
 ```
 
-### Step 4: Configure Live Environment Variables & Secret Manager (BigQuery Dry-Run + Gemini 2.5 + IAP)
-Store your Gemini / Vertex AI key in Google Cloud Secret Manager and attach it to Cloud Run so [`backend/gcp_production_bridge.py`](backend/gcp_production_bridge.py) activates live `google-cloud-bigquery` dry-run jobs and live Gemini 2.5 synthesis:
+### Step 4: Configure Live Environment Variables & Secret Manager (BigQuery Dry-Run + Gemini 3.1 Pro + IAP)
+Store your Gemini / Vertex AI key in Google Cloud Secret Manager and attach it to Cloud Run so [`backend/gcp_production_bridge.py`](backend/gcp_production_bridge.py) activates live `google-cloud-bigquery` dry-run jobs and live **Gemini 3.1 Pro (`gemini-3.1-pro-preview`)** & **Gemini 3 Flash (`gemini-3-flash-preview`)** synthesis:
 
 ```bash
 # 1. Create secret for Gemini API Key
 echo -n "YOUR_GEMINI_API_KEY" | gcloud secrets create datatrust-gemini-key --data-file=-
 
-# 2. Update Cloud Run service with live project & IAP audience
+# 2. Update Cloud Run service with live project, Gemini 3.1 Pro model & IAP audience
 gcloud run services update datatrust-ai-control-plane \
   --region=${REGION} \
-  --set-env-vars="GOOGLE_CLOUD_PROJECT=${PROJECT_ID}" \
+  --set-env-vars="GOOGLE_CLOUD_PROJECT=${PROJECT_ID},GEMINI_REASONING_MODEL=gemini-3.1-pro-preview,GEMINI_FAST_MODEL=gemini-3-flash-preview" \
   --set-env-vars="IAP_AUDIENCE=/projects/PROJECT_NUMBER/global/backendServices/BACKEND_SERVICE_ID" \
   --set-secrets="GEMINI_API_KEY=datatrust-gemini-key:latest"
 ```

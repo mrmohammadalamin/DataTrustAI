@@ -156,7 +156,7 @@ const OVERALL_MINDMAP_NODES: MindmapNodeData[] = [
       'Packages DataTrust AI for Google Cloud Marketplace self-hosted deployment, Vertex AI Agent Builder native deployment, and Multi-Tenant GSI Partner command centers.',
     technicalDetails: [
       'Option A: Customer VPC Cloud Run + Terraform IaC (deploy/terraform/main.tf)',
-      'Option B: Vertex AI Agent Engine + Gemini 2.5 Pro/Flash Native',
+      'Option B: Vertex AI Agent Engine + Gemini 3.1 Pro (gemini-3.1-pro-preview) & Gemini 3 Flash Native',
       'Option C: Embedded Looker Action Hub & Dataplex Governance Extension',
     ],
     sampleOutput: `{
@@ -282,7 +282,7 @@ const AGENTIC_WORKFLOW_STEPS: AgentStageStep[] = [
     stepNumber: 2,
     stageCode: '02_DIAGNOSE',
     agentName: 'Cross-System Lineage & Root-Cause Investigator Agent',
-    modelOrEngine: 'Vertex AI Gemini 2.5 Pro + Column-Level DAG Graph Analyzer',
+    modelOrEngine: 'Vertex AI Gemini 3.1 Pro (gemini-3.1-pro-preview) + Column DAG Analyzer',
     color: '#f59e0b',
     inputTrigger: 'Anomaly Event INC-2026-001 + Cross-Database Lineage Graph (AlloyDB -> BigQuery -> Looker).',
     activities: [
@@ -307,7 +307,7 @@ const AGENTIC_WORKFLOW_STEPS: AgentStageStep[] = [
     stepNumber: 3,
     stageCode: '03_REPAIR',
     agentName: 'Dialect-Aware SQL & dbt Remediation Synthesizer Agent',
-    modelOrEngine: 'Gemini 2.5 Pro Code Synthesizer + Multi-Dialect SQL Transpiler',
+    modelOrEngine: 'Gemini 3.1 Pro Code Synthesizer + Multi-Dialect SQL Transpiler',
     color: '#3b82f6',
     inputTrigger: 'Verified Root Cause (1-to-many join fanout on order_id in alloydb_payments).',
     activities: [
@@ -1088,7 +1088,7 @@ export const ArchitectureMindmapStudioTab: React.FC = () => {
                   },
                   {
                     file: 'gcp_production_bridge.py',
-                    role: 'Live google-cloud-bigquery dry_run=True SDK integration & Vertex AI / Gemini 2.5 Flash live API bridge.',
+                    role: 'Live google-cloud-bigquery dry_run=True SDK integration & Vertex AI / Gemini 3.1 Pro (gemini-3.1-pro-preview) live API bridge.',
                   },
                 ].map((m) => (
                   <div
@@ -1251,15 +1251,15 @@ terraform -chdir=deploy/terraform apply \\
 
               <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 space-y-2">
                 <div className="font-bold text-purple-300">
-                  3. Enable Google Cloud Identity-Aware Proxy (IAP) &amp; Live Gemini API
+                  3. Enable Google Cloud Identity-Aware Proxy (IAP) &amp; Live Gemini 3.1 Pro API
                 </div>
                 <p className="text-slate-300">
-                  Configure Cloud Run environment variables to activate live BigQuery SDK dry-runs, Gemini 2.5 synthesis, and edge IAP JWT verification:
+                  Configure Cloud Run environment variables to activate live BigQuery SDK dry-runs, Gemini 3.1 Pro (`gemini-3.1-pro-preview`) synthesis, and edge IAP JWT verification:
                 </p>
                 <pre className="bg-slate-950 border border-slate-800 rounded-lg p-2.5 font-mono text-[11px] text-purple-300 overflow-x-auto">
 {`gcloud run services update datatrust-ai-control-plane \\
   --region=us-central1 \\
-  --set-env-vars="GOOGLE_CLOUD_PROJECT=your-gcp-project-id" \\
+  --set-env-vars="GOOGLE_CLOUD_PROJECT=your-gcp-project-id,GEMINI_REASONING_MODEL=gemini-3.1-pro-preview" \\
   --set-env-vars="IAP_AUDIENCE=/projects/12345/global/backendServices/67890" \\
   --set-secrets="GEMINI_API_KEY=datatrust-gemini-key:latest"`}
                 </pre>
