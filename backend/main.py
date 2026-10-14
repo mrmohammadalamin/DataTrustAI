@@ -97,7 +97,7 @@ def get_health() -> Dict[str, Any]:
     return {
         "status": "ok",
         "service": "DataTrust AI Core Engine",
-        "ai_orchestrator": "Gemini 4 Argon (Governed Tool-Calling + Deterministic Verifier)",
+        "ai_orchestrator": "Vertex AI Gemini 3.1 Pro (gemini-3.1-pro-preview) + Deterministic 5-Gate Verifier",
         "zero_data_exfiltration": True,
         "sandbox_tables_count": len(sandbox_db.get_table_catalog_summary()),
         "active_connectors": len(CONNECTORS),
@@ -601,7 +601,7 @@ def simulate_incoming_webhook_incident(req: SimulateWebhookRequest) -> Incident:
         tenant_id=new_inc.tenant_id,
         incident_id=new_inc.incident_id,
         actor=req.alert_source,
-        role="Autonomous Webhook & Gemini 4 Argon Investigator",
+        role="Autonomous Webhook & Vertex AI Gemini 3.1 Pro Investigator",
         action="WEBHOOK_INCIDENT_INVESTIGATED_AND_VERIFIED",
         resources=["firestore://collections/subscriptions", "bigquery://saas_finance.fct_enterprise_mrr"],
         access_mode="ISOLATED_SANDBOX_EXECUTION",

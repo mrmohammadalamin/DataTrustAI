@@ -117,7 +117,7 @@ export const GovernedAnalyticsStudio: React.FC<AnalyticsProps> = ({ presets }) =
         <div className="lg:col-span-8 bg-[#111827] border border-slate-800 rounded-xl p-5 space-y-4">
           <div>
             <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-              Natural-Language Question for Gemini 4 Argon SQL Synthesizer
+              Natural-Language Question for Vertex AI Gemini 3.1 Pro SQL Synthesizer
             </label>
             <div className="flex gap-2">
               <input

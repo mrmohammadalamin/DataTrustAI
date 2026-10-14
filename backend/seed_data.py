@@ -1075,7 +1075,7 @@ def build_initial_audit_logs() -> List[AuditLogEntry]:
             timestamp="2026-10-12T06:16:12Z",
             tenant_id="tenant-retail-uk",
             incident_id="INC-2026-001",
-            actor="Gemini 4 Argon Orchestrator",
+            actor="Vertex AI Gemini 3.1 Pro Orchestrator",
             role="Root-Cause Investigator (Read-Only Service Account)",
             action="CROSS_DB_LINEAGE_AND_HYPOTHESIS_PROBE",
             gcp_resources_touched=[

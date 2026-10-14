@@ -4,9 +4,19 @@
 
 [![Stack: FastAPI + Python 3.13](https://img.shields.io/badge/Backend-FastAPI_%7C_Python_3.13-009688?style=flat-square)](#3-technical-module-architecture-mindmap)
 [![Frontend: React 19 + TypeScript](https://img.shields.io/badge/Frontend-React_19_%7C_TypeScript_5-3178C6?style=flat-square)](#3-technical-module-architecture-mindmap)
-[![Cloud: Google Cloud Run + Vertex AI](https://img.shields.io/badge/Google_Cloud-Cloud_Run_%7C_Vertex_AI_%7C_BigQuery-4285F4?style=flat-square)](#7-tutorial-how-to-configure--deploy-in-google-cloud)
-[![Security: Cloud IAP + 4-Tier RBAC](https://img.shields.io/badge/Security-Cloud_IAP_%7C_OIDC_%7C_RBAC-10B981?style=flat-square)](#5-security-iap-sso--4-role-rbac-architecture)
+[![Cloud: Google Cloud Run + Vertex AI Gemini 3.1 Pro](https://img.shields.io/badge/Google_Cloud-Cloud_Run_%7C_Gemini_3.1_Pro_%7C_BigQuery-4285F4?style=flat-square)](#7-tutorial-how-to-configure--deploy-in-google-cloud)
+[![Security: Cloud IAP + 4-Tier RBAC](https://img.shields.io/badge/Security-Cloud_IAP_%7C_OIDC_%7C_RBAC-10B981?style=flat-square)](#5-security-google-cloud-iap-sso--4-role-rbac-architecture)
 [![Tests: 6/6 Pytest Passing](https://img.shields.io/badge/Verification-5--Gate_Sandbox_%7C_6%2F6_Pytest-EC4899?style=flat-square)](#4-full-agentic-solution-architecture--activities-with-outputs)
+
+[![Watch Full Video Walkthrough on YouTube](https://img.shields.io/badge/YouTube-Watch_Full_DataTrust_AI_Video_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Y0If6TBHJrM?si=aWsNurvIwDbi_LHp)
+
+---
+
+## 🎥 Watch the Full Video Demo on YouTube
+
+👉 **[Click Here to Watch the Full DataTrust AI End-to-End Video Walkthrough on YouTube (`https://youtu.be/Y0If6TBHJrM`)](https://youtu.be/Y0If6TBHJrM?si=aWsNurvIwDbi_LHp)**
+
+[![DataTrust AI Video Walkthrough Preview](docs/screenshots/02-command-center-6-stage-loop.png)](https://youtu.be/Y0If6TBHJrM?si=aWsNurvIwDbi_LHp)
 
 ---
 
@@ -349,55 +359,72 @@ DataTrust AI implements a defense-in-depth security model designed for regulated
 
 ---
 
-## 6. Tutorial: How End-Users Use DataTrust AI (Step-by-Step)
+## 6. Tutorial: How End-Users Use DataTrust AI (Step-by-Step with Live Screenshots)
 
-Follow this step-by-step tutorial to experience every capability of DataTrust AI in your browser (`http://127.0.0.1:5173`):
+Follow this step-by-step tutorial (or watch the **[Full YouTube Video Demo](https://youtu.be/Y0If6TBHJrM?si=aWsNurvIwDbi_LHp)**) to experience every capability of DataTrust AI in your browser (`http://127.0.0.1:5173`):
 
 ### Step 1: Sign In via the Google Cloud Identity Platform / IAP Gate
 1. Open `http://127.0.0.1:5173`. You will be greeted by the **Google Cloud Identity Platform & IAP Security Gate Modal**.
 2. Choose how you want to authenticate:
    * **Tab 1 (`1-Click Google Cloud IAP / SSO`)**: Click any of the 4 pre-configured enterprise personas:
-     * **Elena Rostova** (`DATA_GOVERNANCE_APPROVER`) — Full approval & sandbox rights.
-     * **Marcus Vance** (`DATA_ENGINEER`) — Can connect databases and run the 5-Gate Sandbox, but blocked from approving production PRs (`HTTP 403` demo).
-     * **Priya Patel** (`DATA_VIEWER`) — Read-only executive viewer.
-     * **David Kim** (`GCP_PARTNER_ADMIN`) — Multi-tenant Google Cloud Partner administrator.
+     * **Sarah Chen** (`DATA_GOVERNANCE_APPROVER`) — Full approval & sandbox rights (`roles/dataplex.dataOwner + roles/bigquery.dataEditor`).
+     * **Marcus Vance** (`GCP_PARTNER_ADMIN`) — Multi-tenant Google Cloud Partner administrator (`roles/iam.workloadIdentityUser + roles/dataplex.admin`).
+     * **Liam Okafor** (`DATA_ENGINEER`) — Can connect databases and run the 5-Gate Sandbox, but blocked from approving production PRs (`HTTP 403` demo).
+     * **Elena Rostova** (`DATA_VIEWER`) — Read-only executive viewer (`roles/bigquery.metadataViewer`).
    * **Tab 2 (`Corporate Email Login`)**: Sign in with email and password.
    * **Tab 3 (`New Organization Sign-Up`)**: Register your own name, corporate email, GCP Project ID (e.g., `my-enterprise-prod-01`), and desired RBAC role.
 3. You can switch roles at any time by clicking **"Switch Role / SSO"** in the top-right header bar.
 
-### Step 2: Connect Any Google Cloud or Multi-Cloud Database
-1. In the left sidebar, select **`Command Center & DBs`**.
-2. Scroll to the **Google Cloud & Multi-Cloud Data Estate** section and click **`+ Connect GCP / Multi-Cloud Platform`**.
-3. Click any of the **12 Quick-Select Platform Presets** (e.g., *BigQuery*, *AlloyDB for PostgreSQL*, *Cloud Spanner*, *Cloud SQL*, *Bigtable*, *Firestore*, *Snowflake*, *Databricks*, *AWS S3/Redshift via BQ Omni*, or *Azure Synapse via BQ Omni*).
-4. Click **`1. Test Live Connection & Introspect Schema`**. The backend validates the connection URI, verifies read-only IAM posture (`datatrust-agent-ro`), and returns the discovered tables and latency.
-5. Click **`2. Register Read-Only Connector`** to add it to your active control plane.
+![Step 1 — Google Cloud Identity-Aware Proxy (IAP) & OIDC Single Sign-On Gate](docs/screenshots/01-gcp-iap-sso-rbac-gate.png)
 
-### Step 3: Simulate a Live Incident or Inspect Cross-Database Lineage
-1. In **`Command Center & DBs`**, click **`Simulate Live Firestore / BigQuery Drift Webhook`** (top-right of the incidents list) or click on **`INC-2026-001: Net Recognized Daily Revenue (USD)`**.
-2. Navigate to **`Root Cause & Lineage`** in the left sidebar:
-   * Inspect the **Cross-Database Lineage Graph** showing how data flows from `AlloyDB (alloydb_orders & alloydb_payments)` $\rightarrow$ `Datastream CDC` $\rightarrow$ `BigQuery (bq_fct_daily_revenue)` $\rightarrow$ `Looker (Executive Revenue Pulse)`.
-   * Review the **6-Hypothesis Root-Cause Matrix**, showing the exact SQL evidence and why *Hypothesis 1 (Un-deduplicated Payment Webhook Retries)* scored `96.8%` confidence.
+---
 
-### Step 4: Run the 5-Gate Verification Sandbox & Test AST Safety
+### Step 2: Explore the Command Center & Connect Any Google Cloud or Multi-Cloud Database
+1. Once authenticated, you land on **`Command Center & DBs`**, featuring the **6-Stage Traceable Closed Loop** and the **Vertex AI • Gemini 3.1 Pro (`gemini-3.1-pro-preview`) Copilot** on the right.
+
+![Step 2A — DataTrust AI Command Center & 6-Stage Traceable Closed Loop](docs/screenshots/02-command-center-6-stage-loop.png)
+
+2. Click **`+ Connect Google Cloud Database`** to open the universal multi-cloud connection modal.
+3. Select your **Cloud Provider / Ecosystem** (Google Cloud Platform, Snowflake, Databricks, AWS via BigQuery Omni, or Azure via BigQuery Omni) and **Database / Data Platform Product** (e.g., *AlloyDB for PostgreSQL & AlloyDB Omni*, *BigQuery*, *Cloud Spanner*, *Cloud SQL*, *Bigtable*, *Firestore*).
+4. Click **`⚡ Test Connection & Introspect Schema`** to verify read-only Workload Identity access and schema discovery, then click **`Register Read-Only Connector`**.
+
+![Step 2B — Connect Google Cloud Database, Data Platform, or Multi-Cloud Engine](docs/screenshots/03-connect-gcp-multicloud-database.png)
+
+---
+
+### Step 3: Inspect Cross-Database Root Cause & Lineage (`INC-2026-001`)
+1. Navigate to **`Root Cause & Lineage`** in the left sidebar.
+2. Select any active incident scenario (`INC-2026-001: AlloyDB for PostgreSQL`, `INC-2026-002: Cloud Spanner`, `INC-2026-003: Cloud SQL for MySQL`, or `INC-2026-004: Cloud Bigtable`).
+3. Inspect the **Diagnosis Confidence (`98.4%`)**, the expected baseline (`£100,000`) vs. reported metric (`£68,000`, `-32%` variance), the **Cross-Database Lineage Graph**, and the **6-Hypothesis Root-Cause Matrix**.
+
+![Step 3 — Cross-Database Root Cause & Lineage Investigation](docs/screenshots/04-root-cause-lineage-diagnosis.png)
+
+---
+
+### Step 4: Run the 5-Gate Verification Sandbox & Review Side-by-Side SQL Diff
 1. Click **`SQL Repair & 5-Gate Proof`** in the left sidebar.
-2. Inspect the side-by-side **Broken SQL vs. AI-Synthesized SQL Patch**.
-3. Click **`Run 5-Gate Sandbox Verification`**. The backend executes the query against the live SQL sandbox and displays all 5 verification gates passing (`$1,428,500.00` $\rightarrow$ `$1,280,000.00`, eliminating `-$148,500.00` of phantom duplicate revenue).
-4. **Test the Destructive SQL Guardrail:** In the interactive SQL editor box, type `DROP TABLE alloydb_orders;` and click **`Run 5-Gate Sandbox Verification`**. Watch **Gate 1 (AST Safety)** immediately block execution and record a security alert!
+2. Inspect the side-by-side **BEFORE (Broken Transformation in Production: Output `£68,000`)** vs. **AFTER (DataTrust AI Verified SQL Repair: Output `£100,000 — 100% Match`)** on `models/marts/finance/fct_daily_revenue.sql`.
+3. Click **`Re-Run 5-Gate Sandbox Verification`** (or switch to the **`Interactive SQL Sandbox Editor`** tab to test custom SQL and watch **Gate 1 AST Safety** immediately block destructive commands like `DROP TABLE`).
 
-### Step 5: Test RBAC Enforcement & Approve Production Remediation
+![Step 4 — Dialect-Aware SQL Repair & Deterministic 5-Gate Verification Sandbox](docs/screenshots/05-sql-repair-5-gate-sandbox-proof.png)
+
+---
+
+### Step 5: Approve Production Fix, Generate Git Pull Request (`#1408`) & Enforce RBAC
 1. Navigate to **`Approval, PR & Partners`** in the left sidebar.
-2. **Test Unauthorized Role Blocking (`HTTP 403`)**:
-   * Click **`Switch Role / SSO`** in the top header and switch to **Marcus Vance (`DATA_ENGINEER`)** or **Priya Patel (`DATA_VIEWER`)**.
-   * Try clicking **`Approve & Deploy Verified Fix`**. The backend will reject the action with an explicit `RBAC Authorization Denied (HTTP 403)` toast and log the blocked attempt in the audit trail.
-3. **Approve as Governance Owner**:
-   * Switch back to **Elena Rostova (`DATA_GOVERNANCE_APPROVER`)**.
-   * Enter a review note and click **`Approve & Deploy Verified Fix`**.
-   * Observe the incident transition to **`06_APPROVE`**, the signed GitHub Pull Request link generated, and the cryptographic `SHA-256` entry added to the **Immutable Governance Audit Ledger**.
+2. Review the **Automated Git Pull Request Artifact (`#1408`)** (`fix(finance_mart): handle AlloyDB v4.2 settlement_state schema drift in fct_daily_revenue`) and the **Downstream Blast-Radius Analysis (5 Protected Assets)**.
+3. While signed in as **`DATA_GOVERNANCE_APPROVER`** (`Sarah Chen`), click **`Approve & Deploy Verified Fix`** (or test switching to `DATA_ENGINEER` / `DATA_VIEWER` to see the server-side `HTTP 403 Forbidden` RBAC protection).
+
+![Step 5 — Human-in-the-Loop Governance Approval & Automated Git Pull Request](docs/screenshots/07-governance-approval-git-pr.png)
+
+---
 
 ### Step 6: Query Certified Data in the Governed AI SQL Studio
 1. Click **`Governed AI SQL Studio`** in the left sidebar.
-2. Select a preset business question (or type your own question in plain English, such as *"Compare broken revenue vs 5-Gate verified net revenue in BigQuery"* or *"Show Cloud Spanner regional payment settlement totals"*).
-3. Click **`Run Governed Query`**. Inspect the synthesized read-only SQL, the live result table, the `PII_REDACTED` policy enforcement badge, and the **DataTrust Provenance Certificate**.
+2. Click any of the **One-Click Multi-Database Diagnostic Prompts** across AlloyDB, BigQuery, Cloud Spanner, Cloud SQL, Cloud Bigtable, and Firestore—or type your own question in plain English.
+3. Click **`Ask AI & Run SQL`**. Inspect the synthesized read-only SQL, the live result rows from the 8 seeded multi-database sandbox tables, and the **AST Read-Only Enforced** certificate.
+
+![Step 6 — Governed AI SQL Studio (Read-Only Multi-Database Query Studio)](docs/screenshots/06-governed-ai-sql-studio.png)
 
 ---
 

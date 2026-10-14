@@ -309,7 +309,7 @@ export const InvestigationAndLineageTab: React.FC<Props> = ({
         <div className="mb-4">
           <h3 className="text-base font-bold text-white flex items-center gap-2">
             <Cpu className="w-4 h-4 text-blue-400" />
-            Gemini 4 Argon Autonomous Hypothesis Evaluation Matrix ({incident.hypotheses.length} Candidate Causes Tested)
+            Vertex AI Gemini 3.1 Pro Autonomous Hypothesis Evaluation Matrix ({incident.hypotheses.length} Candidate Causes Tested)
           </h3>
           <p className="text-xs text-slate-400">
             Rather than guessing, DataTrust AI systematically tests every candidate hypothesis against read-only metadata, CDC logs, and aggregate SQL probes to prove what broke and rule out false leads.

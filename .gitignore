@@ -1,9 +1,12 @@
-# Strictly exclude Word documents and lock files per project requirements
+# Strictly exclude Word documents, large local video files, and raw root screenshots
 datatrust.docx
 *.docx
 *.doc
 .~lock.*
 ~$*
+*.mp4
+datatrustai.mp4
+/Screenshot *.png
 
 # Python / FastAPI artifacts
 __pycache__/
